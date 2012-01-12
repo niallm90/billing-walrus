@@ -11,7 +11,45 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218104209) do
+ActiveRecord::Schema.define(:version => 20120112100956) do
+
+  create_table "bills", :force => true do |t|
+    t.integer  "vendor_id"
+    t.datetime "issue_date"
+    t.datetime "due_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bills", ["vendor_id"], :name => "index_bills_on_vendor_id"
+
+  create_table "payments", :force => true do |t|
+    t.integer  "slice_id"
+    t.integer  "user_id"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["slice_id"], :name => "index_payments_on_slice_id"
+  add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
+
+  create_table "services", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "slice", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "bill_id"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "slice", ["bill_id"], :name => "index_slice_on_bill_id"
+  add_index "slice", ["user_id"], :name => "index_slice_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -30,5 +68,15 @@ ActiveRecord::Schema.define(:version => 20111218104209) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vendors", :force => true do |t|
+    t.integer  "service_id"
+    t.string   "name"
+    t.text     "contact_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vendors", ["service_id"], :name => "index_vendors_on_service_id"
 
 end
