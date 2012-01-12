@@ -16,6 +16,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :testing do
+  gem 'rspec-rails', '~>2.7.0'
+end
+
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'devise'
