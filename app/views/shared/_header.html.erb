@@ -1,0 +1,17 @@
+<header>
+
+<ul class="nav">
+  <li>Dashboard</li>
+</ul>
+
+<ul class="user">
+  <% if user_signed_in? %>
+    <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+    <li><%= link_to 'Settings', '#' %></li>
+  <% else %>
+    <li><%= link_to 'Sign in', new_user_session_path %></li>
+  <% end %>
+
+</ul>
+
+</header>
