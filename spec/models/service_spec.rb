@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Service do
+
   subject { Service.new(:name => "foo") }
 
   it "should have a name" do
@@ -22,4 +23,5 @@ describe Service do
       existing_vendor.delete
     }.should change(subject.vendors, :count).by -1
   end
+
 end
