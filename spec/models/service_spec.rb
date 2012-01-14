@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Service do
 
-  subject { Service.new(:name => "foo") }
+  subject { FactoryGirl.build(:service) }
 
   it "should have a name" do
-    subject.name.should == "foo"
+    subject.name.should == "A service"
   end
 
   it "should have_many vendors" do

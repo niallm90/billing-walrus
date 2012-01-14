@@ -18,6 +18,7 @@ end
 
 group :testing do
   gem 'rspec-rails', '~>2.7.0'
+  gem 'factory_girl_rails', '~>1.2'
 end
 
 gem 'jquery-rails'
