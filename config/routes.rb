@@ -2,7 +2,7 @@ Blueportal::Application.routes.draw do
 
   devise_for :users
 
-  resources :bills
+  resources :bills, :services
 
   get "users/create"
   get "users/edit"
