@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112100956) do
+ActiveRecord::Schema.define(:version => 20120120053058) do
 
   create_table "bills", :force => true do |t|
     t.integer  "vendor_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20120112100956) do
     t.datetime "updated_at"
   end
 
-  create_table "slice", :force => true do |t|
+  create_table "slices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "bill_id"
     t.integer  "amount"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20120112100956) do
     t.datetime "updated_at"
   end
 
-  add_index "slice", ["bill_id"], :name => "index_slice_on_bill_id"
-  add_index "slice", ["user_id"], :name => "index_slice_on_user_id"
+  add_index "slices", ["bill_id"], :name => "index_slice_on_bill_id"
+  add_index "slices", ["user_id"], :name => "index_slice_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
