@@ -1,0 +1,21 @@
+<h1>Listing slices</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @slices.each do |slice| %>
+  <tr>
+    <td><%= link_to 'Show', slice %></td>
+    <td><%= link_to 'Edit', edit_slice_path(slice) %></td>
+    <td><%= link_to 'Destroy', slice, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Slice', new_slice_path %>
