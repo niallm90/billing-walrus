@@ -4,6 +4,12 @@ Blueportal::Application.routes.draw do
 
   resources :bills, :services, :vendors
 
+  scope :path => 'bills/:id' do
+    post 'slices' => 'slices#new', :as => 'new_slice'
+    put 'slice/:slice_id' => 'slices#update', :as => 'slice'
+    get 'slices' => 'slices#index', :as => 'slices'
+  end
+
   get "users/create"
   get "users/edit"
   get "users/show"
