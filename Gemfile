@@ -21,6 +21,7 @@ group :testing do
   gem 'factory_girl_rails', '~>1.2'
 end
 
+gem 'date_validator'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'devise'
