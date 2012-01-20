@@ -3,11 +3,8 @@ Blueportal::Application.routes.draw do
   devise_for :users
 
   get "users/create"
-
   get "users/edit"
-
   get "users/show"
-
   get "users/dashboard"
 
   root :to => "users#dashboard"
