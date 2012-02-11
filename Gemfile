@@ -23,6 +23,7 @@ group :testing do
   gem 'factory_girl_rails', '~>1.2'
 end
 
+gem 'shoulda-matchers'
 gem 'date_validator'
 gem 'jquery-rails'
 gem 'omniauth'

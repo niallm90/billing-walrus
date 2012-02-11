@@ -6,6 +6,11 @@ describe Slice do
 
   subject { FactoryGirl.build(:slice, :user => user) }
 
+  it { should belong_to :user }
+  it { should belong_to :bill }
+  it { should validate_presence_of :user }
+  it { should validate_presence_of :bill }
+
   it "has the correct fields" do
     subject.user.should == user
     subject.amount.should == 1000

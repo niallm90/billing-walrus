@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Vendor do
 
   subject { FactoryGirl.create(:vendor) }
+
+  it { should belong_to :service }
+  it { should have_many :bills }
   
   it "has the correct fields" do
     subject.name.should == "A vendor"

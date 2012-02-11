@@ -8,6 +8,11 @@ describe Payment do
 
   subject { FactoryGirl.build(:payment, :user => user, :slice => slice) }
 
+  it { should belong_to :user }
+  it { should belong_to :slice }
+  it { should validate_presence_of :user }
+  it { should validate_presence_of :slice }
+
   it "has the correct fields" do
     subject.user.should == user
     subject.slice.should == slice
