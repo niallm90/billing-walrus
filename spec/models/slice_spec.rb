@@ -8,6 +8,7 @@ describe Slice do
 
   it { should belong_to :user }
   it { should belong_to :bill }
+  it { should have_many :payments }
   it { should validate_presence_of :user }
   it { should validate_presence_of :bill }
 
@@ -24,6 +25,12 @@ describe Slice do
     lambda do
       Slice.create!(:amount => 1.23)
     end.should raise_exception(ActiveRecord::RecordInvalid, /integer/)
+  end
+
+  it "should return the total amount paid towards this slice" do
+    subject.total_paid.should == 0
+    subject.payments.build(:amount => 10, :user => subject.user)
+    subject.total_paid.should == 10
   end
 
 end
