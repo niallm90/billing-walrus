@@ -18,7 +18,7 @@ group :assets do
 end
 
 
-group :testing do
+group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~>1.2'
 end
@@ -29,15 +29,4 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'devise'
 gem 'cells'
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
+gem 'pry'
