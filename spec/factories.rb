@@ -1,8 +1,11 @@
 #   t.after_create {|t| t.user.tasks << t}
 FactoryGirl.define do
+  sequence :email do |i|
+    "#{i}@example.com"
+  end
 
   factory :user do
-    email "admin@example.com"
+    email { Factory.next :email }
     password "password"
   end
 
@@ -28,7 +31,6 @@ FactoryGirl.define do
   end
 
   factory :payment do
-    association :user, :factory => :user
     association :slice, :factory => :slice
     amount 1000
   end
