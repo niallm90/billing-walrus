@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
     t.integer  "vendor_id"
     t.datetime "issue_date"
     t.datetime "due_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "bills", ["vendor_id"], :name => "index_bills_on_vendor_id"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
     t.integer  "slice_id"
     t.integer  "user_id"
     t.integer  "amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "payments", ["slice_id"], :name => "index_payments_on_slice_id"
@@ -36,16 +36,16 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
 
   create_table "services", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "slices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "bill_id"
     t.integer  "amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "slices", ["bill_id"], :name => "index_slice_on_bill_id"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
     t.integer  "service_id"
     t.string   "name"
     t.text     "contact_details"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "vendors", ["service_id"], :name => "index_vendors_on_service_id"
