@@ -11,6 +11,7 @@ describe BillsController do
   context "when a user is signed in" do
 
     let(:bill) { FactoryGirl.create :bill }
+    let(:vendor) { FactoryGirl.create :vendor }
 
     before do
       @user = FactoryGirl.create :user
@@ -31,6 +32,25 @@ describe BillsController do
       specify { response.should be_success }
 
       specify { assigns(:bill).should == bill }
+    end
+
+    describe 'POST create' do
+      specify {
+        expect {
+          post :create,
+            :vendor => vendor,
+            :issue_date => Time.now,
+            :due_date => Time.now+20
+        }.to change(Bill, :count).by 1
+
+        response.should redirect_to bill_url Bill.last.id
+        Bill.last.vendor.should == vendor
+      }
+
+      specify {
+        post :create, :invalid => "invalid"
+        response.should render_template :new
+      }
     end
   end
 end

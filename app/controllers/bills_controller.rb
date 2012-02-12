@@ -29,15 +29,18 @@ class BillsController < ApplicationController
 
   # POST /bills
   def create
-    @bill = Bill.new(params[:bill])
+    @bill = Bill.new(
+      :issue_date => params[:issue_date],
+      :due_date => params[:due_date]
+    )
+    @bill.vendor_id = params[:vendor]
 
     respond_to do |format|
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
-        format.json { render json: @bill, status: :created, location: @bill }
       else
+        flash.now[:error] = "There was a problem creating the Bill. Please try again."
         format.html { render action: "new" }
-        format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
