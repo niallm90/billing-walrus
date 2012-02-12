@@ -14,7 +14,6 @@ FactoryGirl.define do
   end
 
   factory :vendor do
-    association :service, :factory => :service
     name "A vendor"
   end
 

@@ -4,7 +4,7 @@ describe Service do
 
   subject { FactoryGirl.build(:service) }
 
-  it { should have_many :vendors }
+  it { should have_and_belong_to_many :vendors }
 
   it "should have a name" do
     subject.name.should == "A service"
@@ -16,8 +16,9 @@ describe Service do
 
   it "should allow vendors to be added and deleted" do
     expect {
-      new_vendor = subject.vendors.build
-      new_vendor.save!
+      subject.vendors << FactoryGirl.build(:vendor)
+      subject.save
+      subject.reload
     }.should change(subject.vendors, :count).by 1
 
     expect {

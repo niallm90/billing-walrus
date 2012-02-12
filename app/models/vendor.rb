@@ -1,4 +1,4 @@
 class Vendor < ActiveRecord::Base
-  belongs_to :service
+  has_and_belongs_to_many :services
   has_many :bills
 end

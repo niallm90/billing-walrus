@@ -4,12 +4,12 @@ describe Vendor do
 
   subject { FactoryGirl.create(:vendor) }
 
-  it { should belong_to :service }
+  it { should have_and_belong_to_many :services }
   it { should have_many :bills }
-  
+
   it "has the correct fields" do
     subject.name.should == "A vendor"
-    subject.service.name.should == "A service"
+    subject.services.class.should == Array
   end
 
   it "has the correct relationship with bill" do

@@ -1,19 +1,29 @@
-u = User.create!(
+user = User.create!(
   :email => 'admin@example.com',
   :password => 'password',
   :password_confirmation => 'password'
 )
 
-s = Service.create!(:name => "Service")
-v = s.vendors.create!(:name => "Vendor")
-b = v.bills.create!(
+misc = Service.create!(:name => "Miscellaneous")
+power = Service.create!(:name => "Power")
+gas = Service.create!(:name => "Gas")
+internet = Service.create!(:name => "Internet")
+
+genesis = Vendor.create(:name => "Genesis Energy")
+snap = Vendor.create(:name => "Snap Internet")
+
+power.vendors << genesis
+gas.vendors << genesis
+internet.vendors << snap
+
+bill = snap.bills.create!(
   :issue_date => Time.now,
   :due_date => Time.now+60,
 )
 5.times do |i|
-  u.slices.create!(
+  user.slices.create!(
     :amount => (i+1)*10,
-    :bill => b
+    :bill => bill
   ).payments.create!(
     :amount => (i+1)*5
   )

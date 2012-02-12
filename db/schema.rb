@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120053058) do
+ActiveRecord::Schema.define(:version => 20120212011853) do
 
   create_table "bills", :force => true do |t|
     t.integer  "vendor_id"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "services_vendors", :force => true do |t|
+    t.integer "service_id"
+    t.integer "vendor_id"
   end
 
   create_table "slices", :force => true do |t|
@@ -70,13 +75,10 @@ ActiveRecord::Schema.define(:version => 20120120053058) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "vendors", :force => true do |t|
-    t.integer  "service_id"
     t.string   "name"
     t.text     "contact_details"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
-
-  add_index "vendors", ["service_id"], :name => "index_vendors_on_service_id"
 
 end

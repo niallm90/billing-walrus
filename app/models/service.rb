@@ -1,5 +1,5 @@
 class Service < ActiveRecord::Base
 
-  has_many :vendors
+  has_and_belongs_to_many :vendors
 
 end
