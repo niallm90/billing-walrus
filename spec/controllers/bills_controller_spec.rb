@@ -35,22 +35,39 @@ describe BillsController do
     end
 
     describe 'POST create' do
-      specify {
-        expect {
+      it "creates a bill" do
+        lambda do
           post :create,
             :vendor => vendor,
             :issue_date => Time.now,
             :due_date => Time.now+20
-        }.to change(Bill, :count).by 1
+        end.should change(Bill, :count).by 1
 
         response.should redirect_to bill_url Bill.last.id
         Bill.last.vendor.should == vendor
-      }
+      end
 
-      specify {
+      it "fails to create invalid bills" do
         post :create, :invalid => "invalid"
         response.should render_template :new
+      end
+    end
+
+    describe 'PUT update' do
+      before {
+        @bill = Bill.new(FactoryGirl.attributes_for(:bill))
+        @bill.vendor_id = FactoryGirl.create(:vendor).id
+        @bill.save!
       }
+
+      it "updates a bill" do
+        lambda do
+          put :update, :id => Bill.last.id,
+            :bill => {
+              :due_date => Bill.last.due_date+50
+            }
+        end.should change{ Bill.last.due_date }
+      end
     end
   end
 end

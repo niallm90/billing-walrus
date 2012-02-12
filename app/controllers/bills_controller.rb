@@ -39,7 +39,7 @@ class BillsController < ApplicationController
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
       else
-        flash.now[:error] = "There was a problem creating the Bill. Please try again."
+        flash.now[:warning] = "There was a problem creating the Bill. Please try again."
         format.html { render action: "new" }
       end
     end
@@ -50,13 +50,11 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
 
     respond_to do |format|
-      if @bill.update_attributes(params[:bill])
+      if @bill.update_attributes!(params[:bill])
         format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
-        format.json { head :ok }
       else
         flash.now[:warning] = "There was an error"
         format.html { render action: "edit" }
-        format.json { render json: @bill.errors, status: :unprocessable_entity }
       end
     end
   end
