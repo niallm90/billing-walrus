@@ -6,6 +6,8 @@ gem 'rails', '~>3.2.1'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'twitter-bootstrap-rails'
+gem 'twitter_bootstrap_form_for', :git => 'http://github.com/tzeskimo/twitter_bootstrap_form_for.git'
 
 
 # Gems used only for assets and not required
