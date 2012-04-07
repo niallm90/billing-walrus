@@ -5,21 +5,26 @@ class BillsController < ApplicationController
   # GET /bills
   def index
     @bills = Bill.all
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @bills }
+    end
   end
 
   # GET /bills/1
   def show
     @bill = Bill.find(params[:id])
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @bill }
+    end
   end
 
   # GET /bills/new
   def new
     @bill = Bill.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @bill }
-    end
+    format.html # new.html.erb
   end
 
   # GET /bills/1/edit
@@ -38,9 +43,11 @@ class BillsController < ApplicationController
     respond_to do |format|
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
+        format.json { render json: @bill }
       else
         flash.now[:warning] = "There was a problem creating the Bill. Please try again."
         format.html { render action: "new" }
+        format.json { render json: {"status" => "failure", "message" => "There was a problem creating the Bill. Please try again."} }
       end
     end
   end
@@ -51,10 +58,12 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       if @bill.update_attributes!(params[:bill])
-        format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
+        format.html { redirect_to @bill, notice: "Bill was successfully updated." }
+        format.json { render json: @bill }
       else
         flash.now[:warning] = "There was an error"
         format.html { render action: "edit" }
+        format.json { render json: {"status" => "failure", "message" => "Bill was successfully updated." } }
       end
     end
   end
