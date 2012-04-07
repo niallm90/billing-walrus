@@ -5,6 +5,7 @@ describe Service do
   subject { FactoryGirl.build(:service) }
 
   it { should have_and_belong_to_many :vendors }
+  it { should validate_presence_of :name }
 
   it "should have a name" do
     subject.name.should == "A service"
