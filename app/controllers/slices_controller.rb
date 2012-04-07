@@ -1,4 +1,7 @@
 class SlicesController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /slices
   # GET /slices.json
   def index
@@ -40,7 +43,11 @@ class SlicesController < ApplicationController
   # POST /slices
   # POST /slices.json
   def create
-    @slice = Slice.new(params[:slice])
+    @slice = Slice.new(
+      :amount => params[:amount]
+    )
+    @slice.bill_id = params[:bill]
+    @slice.user_id = params[:user]
 
     respond_to do |format|
       if @slice.save
