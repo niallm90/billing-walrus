@@ -4,6 +4,6 @@ class Service < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  attr_accessible :name
+  attr_accessible :name, :vendor_ids
 
 end

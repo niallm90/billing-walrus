@@ -7,6 +7,8 @@ describe Vendor do
   it { should have_and_belong_to_many :services }
   it { should have_many :bills }
 
+  it { should validate_presence_of :name }
+
   it "has the correct fields" do
     subject.name.should == "A vendor"
     subject.services.class.should == Array
