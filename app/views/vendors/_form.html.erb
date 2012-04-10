@@ -1,4 +1,4 @@
-<%= form_for(@vendor) do |f| %>
+<%= form_for(@vendor, :html => {:class => "form-horizontal"}) do |f| %>
   <% if @vendor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vendor.errors.count, "error") %> prohibited this vendor from being saved:</h2>
@@ -11,7 +11,27 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class => "control" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :service_ids, "Services", :class => "control-label" %>
+    <div class="controls">
+      <% Service.all.each do |service| -%>
+        <label class="checkbox">
+          <%= check_box_tag "vendor[service_ids][]", service.id %>
+          <%= service.name %>
+        </label>
+      <% end -%>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary'%>
+    <%= link_to "Back", :back, :class => "btn" %>
   </div>
 <% end %>
