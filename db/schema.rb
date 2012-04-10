@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212011853) do
+ActiveRecord::Schema.define(:version => 20120409044524) do
 
   create_table "bills", :force => true do |t|
     t.integer  "vendor_id"
-    t.datetime "issue_date"
-    t.datetime "due_date"
+    t.date     "issue_date"
+    t.date     "due_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

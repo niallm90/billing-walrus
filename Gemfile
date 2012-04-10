@@ -8,6 +8,8 @@ gem 'rails', '~>3.2.1'
 gem 'sqlite3'
 gem 'twitter-bootstrap-rails'
 gem 'twitter_bootstrap_form_for', :git => 'http://github.com/tzeskimo/twitter_bootstrap_form_for.git'
+gem 'bootstrap-datepicker-rails', :git => 'http://github.com/Nerian/bootstrap-datepicker-rails.git',
+                                  :require => 'bootstrap-datepicker-rails'
 
 
 # Gems used only for assets and not required

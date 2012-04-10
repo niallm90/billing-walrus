@@ -1,4 +1,11 @@
 GIT
+  remote: http://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: acdc970f23ac84cb16552c96bfdf409a6ed28794
+  specs:
+    bootstrap-datepicker-rails (0.6.3)
+      railties (>= 3.0)
+
+GIT
   remote: http://github.com/tzeskimo/twitter_bootstrap_form_for.git
   revision: c8b8701ae7464e74f022f424571b9342046e239d
   specs:
@@ -170,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-datepicker-rails!
   cells
   coffee-rails
   date_validator
