@@ -5,17 +5,19 @@
     <th>Amount Due</th>
     <th>Amount Paid</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @bill.slices.each do |slice| -%>
   <tr>
     <td><%= number_to_currency(slice.amount) %></td>
     <td><%= number_to_currency(slice.total_paid) %></td>
-    <td><%= link_to 'View Details', slice_url(slice.bill, slice), :class => 'btn' %></td>
-    <td><%= link_to 'Edit', edit_slice_url(slice.bill, slice), :class => 'btn btn-info' %></td>
-    <td><%= link_to 'Delete', slice_url(slice.bill, slice), confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %></td>
+    <td>
+      <span class="pull-right">
+        <%= link_to 'View Details', slice_url(slice.bill, slice), :class => 'btn' %>
+        <%= link_to 'Edit', edit_slice_url(slice.bill, slice), :class => 'btn btn-info' %>
+        <%= link_to 'Delete', slice_url(slice.bill, slice), confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>
@@ -23,5 +25,7 @@
 <div class="form-actions">
   <%= link_to 'Add Receiver', new_slice_path(@bill), :class => 'btn btn-success' %>
   <%= link_to 'Back', bills_path, :class => 'btn' %>
-  <%= link_to 'Edit Bill', edit_bill_path(@bill), :class => 'btn btn-primary pull-right' %>
+  <span class="pull-right">
+    <%= link_to 'Edit Bill', edit_bill_path(@bill), :class => 'btn btn-primary' %>
+  </span>
 </div>

@@ -5,15 +5,18 @@
     <th>Name</th>
     <th>Services</th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @vendors.each do |vendor| %>
   <tr>
     <td><%= vendor.name %></td>
     <td><%= vendor.services.map(&:name).join(', ') %></td>
-    <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
-    <td><%= link_to 'Delete', vendor, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <span class="pull-right">
+        <%= link_to 'Edit', edit_vendor_path(vendor) %>
+        <%= link_to 'Delete', vendor, confirm: 'Are you sure?', method: :delete %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>

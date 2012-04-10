@@ -8,8 +8,6 @@
     <th>Total Due</th>
     <th>Total Paid</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @bills.each do |bill| %>
@@ -19,9 +17,13 @@
     <td><%= bill.due_date.strftime("%B %d, %Y") %></td>
     <td><%= number_to_currency(bill.total_due) %></td>
     <td><%= number_to_currency(bill.total_paid) %></td>
-    <td><%= link_to 'Show', bill, :class => "btn" %></td>
-    <td><%= link_to 'Edit', edit_bill_path(bill), :class => "btn btn-info" %></td>
-    <td><%= link_to 'Delete', bill, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+    <td>
+      <span class="pull-right">
+        <%= link_to 'Show', bill, :class => "btn" %>
+        <%= link_to 'Edit', edit_bill_path(bill), :class => "btn btn-info" %>
+        <%= link_to 'Delete', bill, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>

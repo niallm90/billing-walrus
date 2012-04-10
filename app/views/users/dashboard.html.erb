@@ -12,8 +12,6 @@
       <th>Total Due</th>
       <th>Total Paid</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
 
   <% @slices.each do |slice| %>
@@ -24,9 +22,13 @@
         <td><%= slice.bill.due_date.strftime("%B %d, %Y") %></td>
         <td><%= number_to_currency(slice.amount) %></td>
         <td><%= number_to_currency(slice.total_paid) %></td>
-        <td><%= link_to 'View Bill', bill_url(slice.bill), :class => "btn" %></td>
-        <td><%= link_to 'View Details', slice_url(slice.bill, slice), :class => "btn" %></td>
-        <td><%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %></td>
+        <td>
+          <span class="pull-right">
+            <%= link_to 'View Bill', bill_url(slice.bill), :class => "btn" %>
+            <%= link_to 'View Details', slice_url(slice.bill, slice), :class => "btn" %>
+            <%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %>
+          </span>
+        </td>
       </tr>
     <% end -%>
   <% end %>
@@ -35,6 +37,8 @@
 
 <div class="form-actions">
   <%= link_to "Create Bill", new_bill_url, :class => 'btn btn-success' %>
-  <%= link_to "View Services", services_url, :class => 'btn pull-right' %>
-  <%= link_to "View Vendors", vendors_url, :class => 'btn pull-right' %>
+  <span class="pull-right">
+    <%= link_to "View Services", services_url, :class => 'btn' %>
+    <%= link_to "View Vendors", vendors_url, :class => 'btn' %>
+  </span>
 </div>

@@ -13,14 +13,17 @@
   <tr>
     <th>Amount</th>
     <th></th>
-    <th></th>
   </tr>
 
   <% @slice.payments.all.each do |payment| -%>
     <tr>
       <td><%= number_to_currency(payment.amount) %></td>
-      <td><%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) %></td>
-      <td><%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete %></td>
+      <td>
+        <span class="pull-right">
+          <%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) %>
+          <%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete %>
+        </span>
+      </td>
     </tr>
   <% end %>
 </table>

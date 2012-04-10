@@ -4,14 +4,17 @@
   <tr>
     <th>Name</th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @services.each do |service| %>
   <tr>
     <td><%= service.name %></td>
-    <td><%= link_to 'Edit', edit_service_path(service) %></td>
-    <td><%= link_to 'Delete', service, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <span class="pull-right">
+        <%= link_to 'Edit', edit_service_path(service) %>
+        <%= link_to 'Delete', service, confirm: 'Are you sure?', method: :delete %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>
