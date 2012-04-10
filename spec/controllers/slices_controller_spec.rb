@@ -29,13 +29,14 @@ describe SlicesController do
     describe 'POST create' do
       it "creates a slice" do
         lambda do
-          post :create,
-            :user => @user,
-            :amount => 100,
-            :bill => bill
+          post :create, :slice => {
+              :user_id => @user.id,
+              :amount => 100,
+              :bill_id => bill.id
+            }
         end.should change(Slice, :count).by 1
 
-        response.should redirect_to slice_url Slice.last.bill.id, Slice.last.id
+        response.should redirect_to bill_url Slice.last.bill
         Slice.last.bill.should == bill
       end
 

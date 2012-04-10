@@ -16,7 +16,7 @@ class SlicesController < ApplicationController
   # GET /slices/new
   # GET /slices/new.json
   def new
-    @slice = Slice.new({:bill_id => params[:bill_id]})
+    @slice = Slice.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,16 +31,12 @@ class SlicesController < ApplicationController
   # POST /slices
   # POST /slices.json
   def create
-    @slice = Slice.new(
-      :amount => params[:amount]
-    )
-    @slice.bill_id = params[:bill]
-    @slice.user_id = params[:user]
+    @slice = Slice.new(params[:slice])
 
     respond_to do |format|
       if @slice.save
         flash[:notice] = 'Slice was successfully created.'
-        format.html { redirect_to slice_path @slice.bill, @slice }
+        format.html { redirect_to bill_url @slice.bill }
       else
         format.html { render action: "new" }
       end

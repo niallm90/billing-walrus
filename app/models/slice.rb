@@ -3,7 +3,7 @@ class Slice < ActiveRecord::Base
   belongs_to :bill
   has_many :payments, :dependent => :destroy
 
-  attr_accessible :amount, :user, :bill, :payments
+  attr_accessible :amount, :user_id, :bill_id, :payments
 
   validates :amount, :numericality => {
                         :greater_than => 0,
