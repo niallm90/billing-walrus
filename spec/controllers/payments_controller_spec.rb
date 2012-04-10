@@ -71,5 +71,21 @@ describe PaymentsController do
         end.should change{ Payment.last.amount }
       end
     end
+
+    describe 'DELETE destroy' do
+      before(:each) {
+        @payment = FactoryGirl.create :payment
+        @payment.slice_id = FactoryGirl.create(:slice).id
+        @payment.save!
+      }
+
+      it "deletes a payment" do
+        lambda do
+          delete :destroy, :id => @payment.id
+          response.should redirect_to slice_url(@payment.slice.bill, @payment.slice)
+        end.should change(Payment, :count).by(-1)
+      end
+    end
+
   end
 end

@@ -66,10 +66,6 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
     slice = @payment.slice
     @payment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to slice_url slice }
-      format.json { head :ok }
-    end
+    redirect_to slice_url(slice.bill, slice)
   end
 end
