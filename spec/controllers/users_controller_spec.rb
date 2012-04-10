@@ -20,7 +20,7 @@ describe UsersController do
 
       specify { response.should be_success }
 
-      specify { assigns(:slices).should == [] }
+      specify { assigns(:slices).should == slices }
     end
   end
 
