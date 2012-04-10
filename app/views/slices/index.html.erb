@@ -1,5 +1,5 @@
 <h1>Listing slices</h1>
-
+<hr />
 <table>
   <tr>
     <th></th>
@@ -9,9 +9,9 @@
 
 <% @slices.each do |slice| %>
   <tr>
-    <td><%= link_to 'Show', slice %></td>
-    <td><%= link_to 'Edit', edit_slice_path(slice) %></td>
-    <td><%= link_to 'Destroy', slice, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', slice_path(slice.bill, slice) %></td>
+    <td><%= link_to 'Edit', edit_slice_path(slice.bill, slice) %></td>
+    <td><%= link_to 'Destroy', slice_path(slice.bill, slice), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

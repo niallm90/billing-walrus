@@ -1,4 +1,4 @@
-<%= form_for(@slice) do |f| %>
+<%= form_for(@slice, :html => {:class => "form-horizontal"}) do |f| %>
   <% if @slice.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slice.errors.count, "error") %> prohibited this slice from being saved:</h2>
@@ -11,7 +11,24 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.hidden_field :bill_id, :value => params[:bill_id] %>
+
+  <div class="control-group">
+    <%= f.label :user_id, "Receiver", :class => "control-label" %>
+    <div class="controls">
+      <%= f.select :user_id, User.all.map { |v| [v.email, v.id] } %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :amount, "Amount Due", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+    <%= link_to "Back", bill_path(params[:bill_id]), :class => "btn" %>
   </div>
 <% end %>
