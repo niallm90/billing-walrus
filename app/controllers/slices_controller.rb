@@ -71,8 +71,6 @@ class SlicesController < ApplicationController
     bill = @slice.bill
     @slice.destroy
 
-    respond_to do |format|
-      format.html { redirect_to bill }
-    end
+    redirect_to bill
   end
 end

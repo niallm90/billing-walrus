@@ -61,5 +61,30 @@ describe SlicesController do
         end.should change{ Slice.last.amount }
       end
     end
+
+    describe 'DELETE destroy' do
+      before(:each) {
+        @slice = FactoryGirl.create :slice
+        @slice.bill_id = FactoryGirl.create(:bill).id
+        @slice.save!
+      }
+
+      it "deletes a slice" do
+        lambda do
+          delete :destroy, :id => @slice.id
+          response.should redirect_to @slice.bill
+        end.should change(Slice, :count).by(-1)
+      end
+
+      it "deletes the payments associated with the slice" do
+        payment = FactoryGirl.create :payment
+        @slice.payments << payment
+        @slice.save!
+        lambda do
+          delete :destroy, :id => @slice.id
+          response.should redirect_to @slice.bill
+        end.should change(Payment, :count).by(-1)
+      end
+    end
   end
 end

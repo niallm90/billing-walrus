@@ -1,7 +1,7 @@
 class Slice < ActiveRecord::Base
   belongs_to :user
   belongs_to :bill
-  has_many :payments
+  has_many :payments, :dependent => :destroy
 
   attr_accessible :amount, :user, :bill, :payments
 
