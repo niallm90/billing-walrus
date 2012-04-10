@@ -1,0 +1,28 @@
+<%= debug params %>
+<%= form_for([:slice, @payment], :bill_id => params[:bill_id], :slice_id => params[:slice_id], :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+      <% @payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :slice_id, :value => params[:slice_id] %>
+
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+    <%= link_to "Back", :back, :class => "btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<h1>Listing Payments</h1>
+<hr />
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @payments.each do |payment| %>
+  <tr>
+    <td><%= link_to 'Show', slice_payment_url(payment.slice.bill, payment.slice) %></td>
+    <td><%= link_to 'Edit', edit_slice_payment_path(payment.slice.bill, payment.slice, service) %></td>
+    <td><%= link_to 'Destroy', slice_payment_url(payment.slice.bill, payment.slice), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
