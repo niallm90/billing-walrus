@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @slices = Array(current_user.slices)
+    @slices = current_user.slices
   end
 
 end
