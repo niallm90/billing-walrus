@@ -71,5 +71,30 @@ describe BillsController do
         end.should change{ Bill.last.due_date }
       end
     end
+
+    describe 'DELETE destroy' do
+      before(:each) {
+        @bill = Bill.new(FactoryGirl.attributes_for(:bill))
+        @bill.vendor_id = FactoryGirl.create(:vendor).id
+        @bill.save!
+      }
+
+      it "deletes a bill" do
+        lambda do
+          delete :destroy, :id => @bill.id
+          response.should redirect_to bills_url
+        end.should change(Bill, :count).by(-1)
+      end
+
+      it "deletes the slices associated with the bill" do
+        slice = FactoryGirl.create :slice
+        @bill.slices << slice
+        @bill.save!
+        lambda do
+          delete :destroy, :id => @bill.id
+          response.should redirect_to bills_url
+        end.should change(Slice, :count).by(-1)
+      end
+    end
   end
 end

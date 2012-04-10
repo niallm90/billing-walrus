@@ -1,6 +1,6 @@
 class Bill < ActiveRecord::Base
   belongs_to :vendor
-  has_many :slices
+  has_many :slices, :dependent => :destroy
   has_many :payments, :through => :slices
 
   attr_accessible :vendor_id, :issue_date, :due_date, :slices

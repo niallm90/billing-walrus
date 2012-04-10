@@ -60,4 +60,11 @@ class BillsController < ApplicationController
     end
   end
 
+  # DELETE /bills/1
+  def destroy
+    @bill = Bill.find(params[:id])
+    @bill.destroy
+    redirect_to bills_url
+  end
+
 end
