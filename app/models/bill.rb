@@ -3,7 +3,7 @@ class Bill < ActiveRecord::Base
   has_many :slices
   has_many :payments, :through => :slices
 
-  attr_accessible :vendor, :issue_date, :due_date, :slices
+  attr_accessible :vendor_id, :issue_date, :due_date, :slices
 
   validates :vendor,      :presence => true
   validates :issue_date,  :presence => true
