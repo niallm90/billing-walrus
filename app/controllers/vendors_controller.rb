@@ -47,11 +47,9 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.save
-        format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
-        format.json { render json: @vendor, status: :created, location: @vendor }
+        format.html { redirect_to vendors_url, notice: 'Vendor was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @vendor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,11 +61,9 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.update_attributes(params[:vendor])
-        format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
-        format.json { head :ok }
+        format.html { redirect_to vendors_url, notice: 'Vendor was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @vendor.errors, status: :unprocessable_entity }
       end
     end
   end

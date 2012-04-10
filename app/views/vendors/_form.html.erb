@@ -23,7 +23,10 @@
     <div class="controls">
       <% Service.all.each do |service| -%>
         <label class="checkbox">
-          <%= check_box_tag "vendor[service_ids][]", service.id %>
+          <%
+            tick = @vendor.services.map(&:id).include?(service.id)
+          -%>
+          <%= check_box_tag "vendor[service_ids][]", service.id, tick %>
           <%= service.name %>
         </label>
       <% end -%>

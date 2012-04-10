@@ -44,7 +44,7 @@ describe VendorsController do
             }
         end.should change(Vendor, :count).by 1
 
-        response.should redirect_to vendor_url Vendor.last.id
+        response.should redirect_to vendors_url
         Vendor.last.services.should include(service)
       end
 
@@ -66,6 +66,7 @@ describe VendorsController do
             :vendor => {
               :name => "new name"
             }
+          response.should redirect_to vendors_url
         end.should change{ Vendor.last.name }
       end
     end

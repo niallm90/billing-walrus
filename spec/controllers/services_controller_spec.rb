@@ -43,7 +43,7 @@ describe ServicesController do
             }
         end.should change(Service, :count).by 1
 
-        response.should redirect_to service_url Service.last.id
+        response.should redirect_to services_url
         Service.last.name.should == "name"
       end
 
@@ -65,6 +65,7 @@ describe ServicesController do
             :service => {
               :name => "a new name"
             }
+          response.should redirect_to services_url
         end.should change{ Service.last.name }
       end
     end
