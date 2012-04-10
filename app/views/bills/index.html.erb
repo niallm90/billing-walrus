@@ -1,7 +1,12 @@
 <h1>Listing bills</h1>
-
-<table>
+<hr />
+<table class="table table-striped">
   <tr>
+    <th>Issuer</th>
+    <th>Date Issued</th>
+    <th>Date Due</th>
+    <th>Total Due</th>
+    <th>Total Paid</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,13 +14,20 @@
 
 <% @bills.each do |bill| %>
   <tr>
-    <td><%= link_to 'Show', bill %></td>
-    <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Destroy', bill, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= bill.vendor.name %></td>
+    <td><%= bill.issue_date.strftime("%B %d, %Y") %></td>
+    <td><%= bill.due_date.strftime("%B %d, %Y") %></td>
+    <td><%= number_to_currency(bill.total_due) %></td>
+    <td><%= number_to_currency(bill.total_paid) %></td>
+    <td><%= link_to 'Show', bill, :class => "btn" %></td>
+    <td><%= link_to 'Edit', edit_bill_path(bill), :class => "btn btn-info" %></td>
+    <td><%= link_to 'Delete', bill, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Bill', new_bill_path %>
+<div class="form-actions">
+  <%= link_to 'New Bill', new_bill_path, :class => 'btn btn-success' %>
+</div>
