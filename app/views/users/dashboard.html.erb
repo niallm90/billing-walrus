@@ -13,18 +13,22 @@
       <th>Total Paid</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
 
   <% @slices.each do |slice| %>
-    <tr>
-      <td><%= slice.bill.vendor.name %></td>
-      <td><%= slice.bill.issue_date.strftime("%B %d, %Y") %></td>
-      <td><%= slice.bill.due_date.strftime("%B %d, %Y") %></td>
-      <td><%= number_to_currency(slice.amount) %></td>
-      <td><%= number_to_currency(slice.total_paid) %></td>
-      <td><%= link_to 'View Payments', slice_url(slice.bill, slice), :class => "btn" %></td>
-      <td><%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %></td>
-    </tr>
+    <% if slice.user == current_user -%>
+      <tr>
+        <td><%= slice.bill.vendor.name %></td>
+        <td><%= slice.bill.issue_date.strftime("%B %d, %Y") %></td>
+        <td><%= slice.bill.due_date.strftime("%B %d, %Y") %></td>
+        <td><%= number_to_currency(slice.amount) %></td>
+        <td><%= number_to_currency(slice.total_paid) %></td>
+        <td><%= link_to 'View Bill', bill_url(slice.bill), :class => "btn" %></td>
+        <td><%= link_to 'View Details', slice_url(slice.bill, slice), :class => "btn" %></td>
+        <td><%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %></td>
+      </tr>
+    <% end -%>
   <% end %>
   </table>
 <% end -%>

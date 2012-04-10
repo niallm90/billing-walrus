@@ -1,5 +1,14 @@
-<h1>Payments</h1>
+<h1>Bill Receiver Details</h1>
 <hr />
+<h3>Bill Details</h3>
+<div class="well">
+  <span class="label label-info">Issuer</span><span class="label"><%= @slice.bill.vendor.name %></span>
+  <span class="label label-info">Receiver</span><span class="label"><%= @slice.user.email %></span>
+  <span class="label label-info">Amount Due</span><span class="label"><%= number_to_currency(@slice.bill.total_due) %></span>
+  <span class="label label-info">Amount Paid</span><span class="label"><%= number_to_currency(@slice.bill.total_paid) %></span>
+</div>
+<hr />
+<h3>Payments</h3>
 <table class="table table-striped table-condensed">
   <tr>
     <th>Amount</th>
@@ -7,13 +16,13 @@
     <th></th>
   </tr>
 
-<% @slice.payments.all.each do |payment| -%>
-  <tr>
-    <td><%= number_to_currency(payment.amount) %></td>
-    <td><%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) %></td>
-    <td><%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @slice.payments.all.each do |payment| -%>
+    <tr>
+      <td><%= number_to_currency(payment.amount) %></td>
+      <td><%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) %></td>
+      <td><%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <div class="form-actions">
