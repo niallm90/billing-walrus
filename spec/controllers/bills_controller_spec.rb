@@ -38,9 +38,11 @@ describe BillsController do
       it "creates a bill" do
         lambda do
           post :create,
-            :vendor => vendor,
-            :issue_date => Time.now,
-            :due_date => Time.now+20
+            :bill => {
+              :vendor_id => vendor.id,
+              :issue_date => Time.now,
+              :due_date => Time.now+20.days
+            }
         end.should change(Bill, :count).by 1
 
         response.should redirect_to bill_url Bill.last.id

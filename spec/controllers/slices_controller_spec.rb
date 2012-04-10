@@ -4,7 +4,6 @@ require 'spec_helper'
 describe SlicesController do
 
   context "when a user is not signed in" do
-    specify { get(:index).should redirect_to new_user_session_url }
     specify { get(:show).should redirect_to new_user_session_url }
     specify { get(:new).should redirect_to new_user_session_url }
   end
@@ -17,14 +16,6 @@ describe SlicesController do
     before do
       @user = FactoryGirl.create :user
       sign_in @user
-    end
-
-    describe 'GET index' do
-      before { get :index }
-
-      specify { response.should be_success }
-
-      specify { assigns(:slices).should == Slice.all }
     end
 
     describe 'GET show' do
@@ -44,7 +35,7 @@ describe SlicesController do
             :bill => bill
         end.should change(Slice, :count).by 1
 
-        response.should redirect_to slice_url Slice.last.id
+        response.should redirect_to slice_url Slice.last.bill.id, Slice.last.id
         Slice.last.bill.should == bill
       end
 
