@@ -46,9 +46,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
-    cells (3.8.3)
-      actionpack (~> 3.0)
-      railties (~> 3.0)
+    cancan (1.6.7)
     coderay (1.0.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -74,7 +72,6 @@ GEM
     factory_girl_rails (1.7.0)
       factory_girl (~> 2.6.0)
       railties (>= 3.0.0)
-    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -96,9 +93,6 @@ GEM
     method_source (0.7.1)
     mime-types (1.18)
     multi_json (1.2.0)
-    omniauth (1.0.3)
-      hashie (~> 1.2)
-      rack
     orm_adapter (0.0.7)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -179,13 +173,12 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-datepicker-rails!
-  cells
+  cancan
   coffee-rails
   date_validator
   devise
   factory_girl_rails (~> 1.2)
   jquery-rails
-  omniauth
   pg
   pry
   rails (~> 3.2.1)
