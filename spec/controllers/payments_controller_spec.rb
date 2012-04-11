@@ -14,8 +14,7 @@ describe PaymentsController do
     let(:slice) { FactoryGirl.create :slice }
 
     before do
-      @user = FactoryGirl.create :user
-      sign_in @user
+      sign_in_super_user
     end
 
     describe 'GET index' do

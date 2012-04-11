@@ -10,9 +10,8 @@ describe UsersController do
 
   context "when a user is signed in" do
     before do
-      @user = FactoryGirl.create :user
+      sign_in_super_user
       User.any_instance.stub(:slices).and_return slices
-      sign_in @user
     end
 
     describe "GET dashboard" do

@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe ServicesController do
@@ -14,8 +13,7 @@ describe ServicesController do
     let(:service) { FactoryGirl.create :service }
 
     before do
-      @user = FactoryGirl.create :user
-      sign_in @user
+      sign_in_super_user
     end
 
     describe 'GET index' do

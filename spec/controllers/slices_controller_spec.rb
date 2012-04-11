@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe SlicesController do
@@ -14,8 +13,7 @@ describe SlicesController do
     let(:bill) { FactoryGirl.create :bill }
 
     before do
-      @user = FactoryGirl.create :user
-      sign_in @user
+      sign_in_super_user
     end
 
     describe 'GET show' do
