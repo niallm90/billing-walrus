@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
   has_many :slices
   has_many :bills, :through => :slices
 
-  def user?
-    access_level >= USER
+  def verified?
+    access_level >= VERIFIED
   end
 
   def admin?

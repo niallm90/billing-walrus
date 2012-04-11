@@ -17,10 +17,10 @@ describe User do
 
   describe "permissions for" do
     describe "an unvalidated user" do
-      before { subject.access_level = User::UNVALIDATED }
+      before { subject.access_level = User::UNVERIFIED }
 
       it "is not a user" do
-        subject.user?.should be_false
+        subject.verified?.should be_false
       end
 
       it "is not an admin" do
@@ -33,10 +33,10 @@ describe User do
     end
 
     describe "a user" do
-      before { subject.access_level = User::USER }
+      before { subject.access_level = User::VERIFIED }
 
       it "is a user" do
-        subject.user?.should be_true
+        subject.verified?.should be_true
       end
 
       it "is not an admin" do
@@ -52,7 +52,7 @@ describe User do
       before { subject.access_level = User::ADMIN }
 
       it "is a user" do
-        subject.user?.should be_true
+        subject.verified?.should be_true
       end
 
       it "is an admin" do
@@ -68,7 +68,7 @@ describe User do
       before { subject.access_level = User::SUPER_USER }
 
       it "is a user" do
-        subject.user?.should be_true
+        subject.verified?.should be_true
       end
 
       it "is an admin" do
@@ -80,23 +80,5 @@ describe User do
       end
     end
   end
-
-#  context "users" do
-#    expect { subject.user?.should be_true }
-#    expect { subject.admin?.should be_false }
-#    expect { subject.super_user?.should be_false }
-#  end
-#
-#  context "admins" do
-#    expect { subject.user?.should be_true }
-#    expect { subject.admin?.should be_true }
-#    expect { subject.super_user?.should be_false }
-#  end
-#
-#  context "super users" do
-#    expect { subject.user?.should be_true }
-#    expect { subject.admin?.should be_true }
-#    expect { subject.super_user?.should be_true }
-#  end
 
 end

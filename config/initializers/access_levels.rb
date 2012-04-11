@@ -1,6 +1,6 @@
 module AccessLevels
-  UNVALIDATED = 0
-  USER = 1
+  UNVERIFIED = 0
+  VERIFIED = 1
   ADMIN = 2
   SUPER_USER = 3
 end
