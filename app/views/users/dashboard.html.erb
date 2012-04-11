@@ -1,44 +1,48 @@
 <h1>Dashboard</h1>
 <hr />
-<h3>Bills</h3>
-<% if @slices.empty? %>
-  No bills to display
-<% else -%>
-  <table class="table table-striped">
-    <tr>
-      <th>Issuer</th>
-      <th>Date Issued</th>
-      <th>Date Due</th>
-      <th>Total Due</th>
-      <th>Total Paid</th>
-      <th></th>
-    </tr>
-
-  <% @slices.each do |slice| %>
-    <% if slice.user == current_user -%>
+<% if current_user.verified? -%>
+  <h3>Bills</h3>
+  <% if @slices.empty? %>
+    No bills to display
+  <% else -%>
+    <table class="table table-striped">
       <tr>
-        <td><%= slice.bill.vendor.name %></td>
-        <td><%= slice.bill.issue_date.strftime("%B %d, %Y") %></td>
-        <td><%= slice.bill.due_date.strftime("%B %d, %Y") %></td>
-        <td><%= number_to_currency(slice.amount) %></td>
-        <td><%= number_to_currency(slice.total_paid) %></td>
-        <td>
-          <span class="pull-right">
-            <%= link_to 'View Bill', bill_url(slice.bill), :class => "btn" %>
-            <%= link_to 'View Details', slice_url(slice.bill, slice), :class => "btn" %>
-            <%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %>
-          </span>
-        </td>
+        <th>Issuer</th>
+        <th>Date Issued</th>
+        <th>Date Due</th>
+        <th>Total Due</th>
+        <th>Total Paid</th>
+        <th></th>
       </tr>
-    <% end -%>
-  <% end %>
-  </table>
-<% end -%>
 
-<div class="form-actions">
-  <%= link_to "Create Bill", new_bill_url, :class => 'btn btn-success' %>
-  <span class="pull-right">
-    <%= link_to "View Services", services_url, :class => 'btn' %>
-    <%= link_to "View Vendors", vendors_url, :class => 'btn' %>
-  </span>
-</div>
+    <% @slices.each do |slice| %>
+      <% if slice.user == current_user -%>
+        <tr>
+          <td><%= slice.bill.vendor.name %></td>
+          <td><%= slice.bill.issue_date.strftime("%B %d, %Y") %></td>
+          <td><%= slice.bill.due_date.strftime("%B %d, %Y") %></td>
+          <td><%= number_to_currency(slice.amount) %></td>
+          <td><%= number_to_currency(slice.total_paid) %></td>
+          <td>
+            <span class="pull-right">
+              <%= link_to 'View Bill', bill_url(slice.bill), :class => "btn" %>
+              <%= link_to 'View Details', slice_url(slice.bill, slice), :class => "btn" %>
+              <%= link_to 'Make a Payment', new_slice_payment_url(slice.bill, slice), :class => "btn btn-info" %>
+            </span>
+          </td>
+        </tr>
+      <% end -%>
+    <% end %>
+    </table>
+  <% end -%>
+
+  <div class="form-actions">
+    <%= link_to "Create Bill", new_bill_url, :class => 'btn btn-success' %>
+    <span class="pull-right">
+      <%= link_to "View Services", services_url, :class => 'btn' %>
+      <%= link_to "View Vendors", vendors_url, :class => 'btn' %>
+    </span>
+  </div>
+<% else -%>
+  <div class="alert alert-warning">Your account needs to be verified before you can use this application.</div>
+<% end -%>

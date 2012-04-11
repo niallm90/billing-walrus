@@ -4,6 +4,8 @@ class Ability
   def initialize(user)
     user ||= User.new({:access_level => User::UNVERIFIED})
 
+    can :dashboard, User
+
     if user.verified?
       can :read, :all
     end

@@ -1,7 +1,8 @@
 user = User.create!(
   :email => 'admin@example.com',
   :password => 'password',
-  :password_confirmation => 'password'
+  :password_confirmation => 'password',
+  :access_level => User::SUPER_USER
 )
 
 misc = Service.create!(:name => "Miscellaneous")
@@ -23,7 +24,7 @@ bill = snap.bills.create!(
 5.times do |i|
   user.slices.create!(
     :amount => (i+1)*10,
-    :bill => bill
+    :bill_id => bill.id
   ).payments.create!(
     :amount => (i+1)*5
   )
