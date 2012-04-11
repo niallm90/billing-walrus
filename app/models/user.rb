@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :slices
   has_many :bills, :through => :slices
 
+  before_save :default_values
+
   def verified?
     access_level >= VERIFIED
   end
@@ -24,5 +26,11 @@ class User < ActiveRecord::Base
 
   def super_user?
     access_level >= SUPER_USER
+  end
+
+  private
+
+  def default_values
+    self.access_level ||= UNVERIFIED
   end
 end

@@ -15,6 +15,12 @@ describe User do
     subject.bills.class.should == Array
   end
 
+  it "should set the default access_level" do
+    user = FactoryGirl.create(:user)
+    user.reload
+    user.access_level.should == User::UNVERIFIED
+  end
+
   describe "permissions for" do
     describe "an unvalidated user" do
       before { subject.access_level = User::UNVERIFIED }

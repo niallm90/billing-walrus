@@ -7,7 +7,6 @@ FactoryGirl.define do
   factory :user do
     email { Factory.next :email }
     password "password"
-    access_level "user"
   end
 
   factory :service do
