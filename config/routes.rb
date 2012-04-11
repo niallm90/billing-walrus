@@ -1,4 +1,4 @@
-Blueportal::Application.routes.draw do
+BillingWalrus::Application.routes.draw do
 
   devise_for :users
 

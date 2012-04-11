@@ -4,5 +4,5 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Blueportal::Application.load_tasks
+BillingWalrus::Application.load_tasks
 
