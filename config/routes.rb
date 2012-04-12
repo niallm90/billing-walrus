@@ -2,7 +2,7 @@ BillingWalrus::Application.routes.draw do
 
   devise_for :users
 
-  resources :bills, :services, :vendors
+  resources :bills, :services, :vendors, :users
 
   scope :path => 'bills/:bill_id' do
     resources :slices do
@@ -13,11 +13,6 @@ BillingWalrus::Application.routes.draw do
     #get 'slices' => 'slices#index', :as => 'slices'
     #get 'slices/new' => 'slices#new', :as => 'new_slice'
   end
-
-  get "users/create"
-  get "users/edit"
-  get "users/show"
-  get "users/dashboard"
 
   root :to => "users#dashboard"
 
