@@ -1,11 +1,16 @@
 #   t.after_create {|t| t.user.tasks << t}
 FactoryGirl.define do
+  sequence :name do |i|
+    "Name #{i}"
+  end
+
   sequence :email do |i|
     "#{i}@example.com"
   end
 
   factory :user do
     email { Factory.next :email }
+    name { Factory.next :name }
     password "password"
   end
 

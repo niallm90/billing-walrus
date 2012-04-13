@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+:A
 
   include AccessLevels
 
@@ -9,7 +10,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :access_level
+                  :access_level, :name
 
   has_many :slices
   has_many :bills, :through => :slices
