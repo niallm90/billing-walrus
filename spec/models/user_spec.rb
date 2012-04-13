@@ -7,6 +7,24 @@ describe User do
   it { should have_many :slices }
   it { should have_many :bills }
 
+  it "returns the access_levels array that the current user may assign" do
+    expected_access_for = {
+      User::ADMIN => {
+        User::UNVERIFIED => "Unverified",
+        User::VERIFIED => "Verified"
+      },
+      User::SUPER_USER => {
+        User::UNVERIFIED => "Unverified",
+        User::VERIFIED => "Verified",
+        User::ADMIN => "Admin"
+      }
+    }
+    [User::ADMIN, User::SUPER_USER].each do |level|
+      user = FactoryGirl.build(:user, :access_level => level)
+      user.assignable_access_levels.should == expected_access_for[level]
+    end
+  end
+
   it "has many slices" do
     subject.slices.class.should == Array
   end
@@ -19,6 +37,18 @@ describe User do
     user = FactoryGirl.create(:user)
     user.reload
     user.access_level.should == User::UNVERIFIED
+  end
+
+  it "should return the access_level in human readable form" do
+    {
+      User::UNVERIFIED => "Unverified",
+      User::VERIFIED => "Verified",
+      User::ADMIN => "Admin",
+      User::SUPER_USER => "Super User"
+    }.each do |access_constant, human_readable|
+      subject.should_receive(:access_level).and_return(access_constant)
+      subject.display_access_level.should == human_readable
+    end
   end
 
   describe "permissions for" do

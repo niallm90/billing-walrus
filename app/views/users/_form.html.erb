@@ -1,0 +1,30 @@
+<%= twitter_bootstrap_form_for(@user, :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @user.errors.any? -%>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end -%>
+
+  <%= f.text_field :name %>
+
+  <%= f.email_field :email %>
+
+  <% if @user.access_level < User::SUPER_USER and @user.access_level < current_user.access_level -%>
+    <%= f.select :access_level, "Access Level", current_user.assignable_access_levels.map {|k,v| [v,k]} %>
+  <% end -%>
+
+  <%= f.password_field :password %>
+
+  <%= f.password_field :password_confirmation %>
+
+  <%= f.actions do %>
+    <%= f.submit %>
+    <%= link_to 'Back', :back, :class => 'btn' %>
+  <% end -%>
+<% end %>

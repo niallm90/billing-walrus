@@ -12,6 +12,8 @@ class Ability
 
     if user.admin?
       can :manage, [Bill, Payment, Service, Slice, Vendor]
+      can :read, User
+      can :update, User
     end
 
     if user.super_user?

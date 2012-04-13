@@ -51,7 +51,7 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
 
     respond_to do |format|
-      if @bill.update_attributes!(params[:bill])
+      if @bill.update_attributes(params[:bill])
         flash[:notice] = 'Bill was successfully updated.'
         format.html { redirect_to @bill }
       else

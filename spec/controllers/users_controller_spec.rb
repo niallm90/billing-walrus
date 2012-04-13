@@ -55,7 +55,7 @@ describe UsersController do
           post :create,
             :user => FactoryGirl.attributes_for(:user)
 
-          response.should redirect_to User.last
+          response.should redirect_to users_url
         end.should change(User, :count).by 1
       end
 
@@ -66,6 +66,65 @@ describe UsersController do
 
           response.should render_template "new"
         end.should_not change(User, :count)
+      end
+    end
+
+    describe 'PUT update' do
+      before {
+        @temp_user = User.create(FactoryGirl.attributes_for(:user))
+      }
+
+      it "updates a user" do
+        lambda do
+          put :update, :id => @temp_user,
+            :user => {
+              :name => "new name"
+            }
+          @temp_user.reload
+          response.should redirect_to users_url
+        end.should change{ @temp_user.name }
+      end
+
+      it "does not update a user with invalid attributes" do
+        lambda do
+          put :update, :id => @temp_user,
+            :user => {
+              :invalid => "attributes"
+            }
+          @temp_user.reload
+        end.should_not change{ @temp_user.name }
+      end
+
+      it "removes invalid attributes" do
+        lambda do
+          put :update, :id => @temp_user,
+            :user => {
+              :access_level => "5"
+            }
+          @temp_user.reload
+        end.should_not change{ @temp_user.access_level }
+
+        lambda do
+          put :update, :id => @temp_user,
+            :user => {
+              :password => "",
+              :password_confirmation => ""
+            }
+          @temp_user.reload
+        end.should_not change{ @temp_user.password }
+      end
+    end
+
+    describe 'DELETE destroy' do
+      before(:each) {
+        @temp_user = FactoryGirl.create :user
+      }
+
+      it "deletes a user" do
+        lambda do
+          delete :destroy, :id => @user.id
+          response.should redirect_to users_url
+        end.should change(User, :count).by(-1)
       end
     end
   end

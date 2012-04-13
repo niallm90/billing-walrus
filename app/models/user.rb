@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-:A
 
   include AccessLevels
 
@@ -17,6 +16,12 @@ class User < ActiveRecord::Base
 
   before_save :default_values
 
+  def assignable_access_levels
+    assignable_levels = HUMAN_READABLE.clone
+    assignable_levels.delete_if {|k,v| k >= self.access_level }
+    return assignable_levels
+  end
+
   def verified?
     access_level >= VERIFIED
   end
@@ -27,6 +32,10 @@ class User < ActiveRecord::Base
 
   def super_user?
     access_level >= SUPER_USER
+  end
+
+  def display_access_level
+    HUMAN_READABLE[access_level]
   end
 
   private

@@ -1,0 +1,31 @@
+<h1>Users</h1>
+<hr />
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.display_access_level %></td>
+    <td>
+      <span class="pull-right">
+        <%= link_to 'Show', user, :class => "btn" %>
+        <%= link_to 'Edit', edit_user_url(user), :class => "btn" %>
+        <%= link_to 'Delete', user, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+      </span>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<div class="form-actions">
+  <%= link_to 'Create User', new_user_path, :class => 'btn btn-success' %>
+</div>
