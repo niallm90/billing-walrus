@@ -2,7 +2,10 @@ BillingWalrus::Application.routes.draw do
 
   devise_for :users
 
-  resources :bills, :services, :vendors, :users
+  resources :bills, :services, :vendors
+  scope :path => 'admin' do
+    resources :users
+  end
 
   scope :path => 'bills/:bill_id' do
     resources :slices do
