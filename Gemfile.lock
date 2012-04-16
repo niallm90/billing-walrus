@@ -93,6 +93,7 @@ GEM
     method_source (0.7.1)
     mime-types (1.18)
     multi_json (1.2.0)
+    newrelic_rpm (3.3.3)
     orm_adapter (0.0.7)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -179,6 +180,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (~> 1.2)
   jquery-rails
+  newrelic_rpm
   pg
   pry
   rails (~> 3.2.1)
