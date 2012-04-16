@@ -8,6 +8,7 @@ class Ability
 
     if user.verified?
       can :read, :all
+      can :manage, Payment
     end
 
     if user.admin?

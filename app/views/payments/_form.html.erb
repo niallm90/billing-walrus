@@ -1,4 +1,3 @@
-<%= debug params %>
 <%= form_for([:slice, @payment], :bill_id => params[:bill_id], :slice_id => params[:slice_id], :html => {:class => "form-horizontal"}) do |f| %>
   <% if @payment.errors.any? %>
     <div id="error_explanation">
