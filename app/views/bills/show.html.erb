@@ -23,6 +23,8 @@
   </tr>
 <% end %>
 </table>
+<h4>Total Due: <%= number_to_currency(@bill.total_due) %></h4>
+<h4>Total Paid: <%= number_to_currency(@bill.total_paid) %></h4>
 
 <div class="form-actions">
   <%= link_to 'Add Receiver', new_slice_path(@bill), :class => 'btn btn-success' %>
