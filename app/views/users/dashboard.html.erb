@@ -37,12 +37,12 @@
   <% end -%>
 
   <div class="form-actions">
-    <%= link_to "Create Bill", new_bill_url, :class => 'btn btn-info' if can? :manage, Bill %>
+    <%= link_to "View Bills", bills_url, :class => 'btn' if can? :read, Bill %>
+    <%= link_to "View Users", users_url, :class => 'btn' if can? :read, User %>
+    <%= link_to "View Services", services_url, :class => 'btn' %>
+    <%= link_to "View Vendors", vendors_url, :class => 'btn' %>
     <span class="pull-right">
-      <%= link_to "View Bills", bills_url, :class => 'btn' if can? :read, Bill %>
-      <%= link_to "View Users", users_url, :class => 'btn' if can? :read, User %>
-      <%= link_to "View Services", services_url, :class => 'btn' %>
-      <%= link_to "View Vendors", vendors_url, :class => 'btn' %>
+      <%= link_to "Create Bill", new_bill_url, :class => 'btn btn-info' if can? :manage, Bill %>
     </span>
   </div>
 <% else -%>

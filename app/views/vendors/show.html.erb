@@ -1,2 +1,2 @@
-<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
+<%= link_to 'Edit', edit_vendor_path(@vendor) if can? :edit, Vendor %> |
 <%= link_to 'Back', vendors_path %>

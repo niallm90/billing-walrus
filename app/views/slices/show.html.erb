@@ -20,8 +20,8 @@
       <td><%= number_to_currency(payment.amount) %></td>
       <td>
         <span class="pull-right">
-          <%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) %>
-          <%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete %>
+          <%= link_to 'Edit', edit_slice_payment_url(@slice, payment, :bill_id => @slice.bill.id) if can? :update, Payment %>
+          <%= link_to 'Delete', slice_payment_url(@slice, payment, :bill_id => @slice.bill.id), confirm: 'Are you sure?', method: :delete if can? :delete, Slice %>
         </span>
       </td>
     </tr>
@@ -29,6 +29,6 @@
 </table>
 
 <div class="form-actions">
-  <%= link_to 'New Payment', new_slice_payment_path(params[:bill_id], params[:id]), :class => 'btn btn-success' %>
+  <%= link_to 'New Payment', new_slice_payment_path(params[:bill_id], params[:id]), :class => 'btn btn-success' if can? :create, Payment %>
   <%= link_to 'Back', bill_url(@slice.bill), :class => 'btn btn-primary' %>
 </div>

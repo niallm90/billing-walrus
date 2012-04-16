@@ -9,13 +9,13 @@
 
 <% @slices.each do |slice| %>
   <tr>
-    <td><%= link_to 'Show', slice_path(slice.bill, slice) %></td>
-    <td><%= link_to 'Edit', edit_slice_path(slice.bill, slice) %></td>
-    <td><%= link_to 'Destroy', slice_path(slice.bill, slice), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', slice_path(slice.bill, slice) if can? :read, Slice %></td>
+    <td><%= link_to 'Edit', edit_slice_path(slice.bill, slice) if can? :update, Slice %></td>
+    <td><%= link_to 'Destroy', slice_path(slice.bill, slice), confirm: 'Are you sure?', method: :delete if can? :delete, Slice %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Slice', new_slice_path %>
+<%= link_to 'New Slice', new_slice_path if can? :create Slice %>

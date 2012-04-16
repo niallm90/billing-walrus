@@ -27,6 +27,6 @@
 <br />
 
 <div class="form-actions">
-  <%= link_to 'Create User', new_user_path, :class => 'btn btn-info' %>
+  <%= link_to 'Create User', new_user_path, :class => 'btn btn-info' if can? :manage, User %>
   <%= link_to 'Dashboard', root_url, :class => 'btn' %>
 </div>

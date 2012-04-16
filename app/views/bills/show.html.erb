@@ -15,9 +15,9 @@
     <td><%= number_to_currency(slice.total_paid) %></td>
     <td>
       <span class="pull-right">
-        <%= link_to 'View Details', slice_url(slice.bill, slice), :class => 'btn' %>
-        <%= link_to 'Edit', edit_slice_url(slice.bill, slice), :class => 'btn btn-info' %>
-        <%= link_to 'Delete', slice_url(slice.bill, slice), confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
+        <%= link_to 'View Details', slice_url(slice.bill, slice), :class => 'btn' if can? :read, Slice %>
+        <%= link_to 'Edit', edit_slice_url(slice.bill, slice), :class => 'btn btn-info' if can? :update, Bill %>
+        <%= link_to 'Delete', slice_url(slice.bill, slice), confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' if can? :delete, Bill %>
       </span>
     </td>
   </tr>
@@ -27,10 +27,10 @@
 <h4>Total Paid: <%= number_to_currency(@bill.total_paid) %></h4>
 
 <div class="form-actions">
-  <%= link_to 'Add Receiver', new_slice_path(@bill), :class => 'btn btn-success' %>
-  <%= link_to 'Send Bill Email', bill_mail_path(@bill), :method => :post, :class => 'btn btn-success' %>
+  <%= link_to 'Add Receiver', new_slice_path(@bill), :class => 'btn btn-success' if can? :create, Slice %>
+  <%= link_to 'Send Bill Email', bill_mail_path(@bill), :method => :post, :class => 'btn btn-success' if can? :mail, Bill %>
   <%= link_to 'Back', bills_path, :class => 'btn' %>
   <span class="pull-right">
-    <%= link_to 'Edit Bill', edit_bill_path(@bill), :class => 'btn btn-primary' %>
+    <%= link_to 'Edit Bill', edit_bill_path(@bill), :class => 'btn btn-primary' if can? :update, Bill %>
   </span>
 </div>

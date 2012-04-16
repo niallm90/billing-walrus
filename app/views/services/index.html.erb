@@ -11,8 +11,8 @@
     <td><%= service.name %></td>
     <td>
       <span class="pull-right">
-        <%= link_to 'Edit', edit_service_path(service) %>
-        <%= link_to 'Delete', service, confirm: 'Are you sure?', method: :delete %>
+        <%= link_to 'Edit', edit_service_path(service) if can? :edit, Service %>
+        <%= link_to 'Delete', service, confirm: 'Are you sure?', method: :delete if can? :delete, Service %>
       </span>
     </td>
   </tr>
@@ -22,6 +22,6 @@
 <br />
 
 <div class="form-actions">
-  <%= link_to 'Create Service', new_service_path, :class => "btn btn-info" %>
+  <%= link_to 'Create Service', new_service_path, :class => "btn btn-info" if can? :create, Service %>
   <%= link_to 'Dashboard', root_url, :class => 'btn' %>
 </div>
