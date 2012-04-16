@@ -3,6 +3,8 @@ BillingWalrus::Application.routes.draw do
   devise_for :users
 
   resources :bills, :services, :vendors
+  post 'bills/:id/mail' => 'bills#mail', :as => 'bill_mail'
+
   scope :path => 'admin' do
     resources :users
   end

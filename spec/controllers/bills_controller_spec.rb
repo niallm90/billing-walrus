@@ -54,6 +54,21 @@ describe BillsController do
       end
     end
 
+    describe 'POST mail' do
+      it "sends out a bill email" do
+        @bill = FactoryGirl.create :bill
+        @bill.slices << FactoryGirl.create(:slice)
+        @bill.save
+        request.env['HTTP_REFERER'] = "foo"
+        lambda do
+          post :mail,
+            :id => @bill.id
+          response.should redirect_to "foo"
+        end.should change(ActionMailer::Base.deliveries, :count).by 1
+      end
+    end
+
+
     describe 'PUT update' do
       before {
         @bill = Bill.new(FactoryGirl.attributes_for(:bill))

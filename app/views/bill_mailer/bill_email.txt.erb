@@ -1,0 +1,14 @@
+Billing Walrus
+==============
+
+You have payments due!
+
+<%= @bill.vendor_name %> - <%= number_to_currency(@bill.total_due) %> due <%= @bill.due_date %>
+
+Payments
+
+<% @bill.slices each do |slice| -%>
+  <%= slice.user.name %>: <%= number_to_currency(slice.amount) %>
+<%= end %>
+
+To log a payment, visit <%= root_url %>

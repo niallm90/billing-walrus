@@ -46,6 +46,14 @@ class BillsController < ApplicationController
     end
   end
 
+  # POST /bills/1/mail
+  def mail
+    bill = Bill.find(params[:id])
+    BillMailer.bill_email(bill).deliver
+    flash[:notice] = "Mail successfully sent"
+    redirect_to :back
+  end
+
   # PUT /bills/1
   def update
     @bill = Bill.find(params[:id])

@@ -8,6 +8,20 @@ BillingWalrus::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Set the default host for ActionMailer
+  config.action_mailer.default_url_options = { :host => 'walrus.heroku.com' }
+  ActionMailer::Base.default :from => 'bill@walrus.heroku.com'
+  ActionMailer::Base.default :reply_to => 'all@blue-base.info'
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name       => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com'
+  }
+  ActionMailer::Base.delivery_method = :smtp
+
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Your Message Subject or Title</title>
+    <style type="text/css">
+
+      .ExternalClass {width:100%;}
+      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+        line-height: 100%;}
+
+      body {-webkit-text-size-adjust:none; -ms-text-size-adjust:none;}
+      body {margin:0; padding:0;}
+      table td {border-collapse:collapse;}
+
+      p {margin:0; padding:0; margin-bottom:0;}
+
+      h1, h2, h3, h4, h5, h6 {
+        color: black;
+        line-height: 100%;
+      }
+
+      a, a:link {
+        color:#2A5DB0;
+        text-decoration: underline;
+      }
+
+      body, #body_style {
+        background:#ebebeb;
+        min-height:1000px;
+        color:#000;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:12px;
+      }
+      .header { max-height: 50px !important; }
+      .header img { margin-left: 20px; }
+
+      span.yshortcuts { color:#000; background-color:none; border:none;}
+      span.yshortcuts:hover,
+      span.yshortcuts:active,
+      span.yshortcuts:focus {color:#000; background-color:none; border:none;}
+
+      a:visited { color: #3c96e2; text-decoration: none}
+      a:focus   { color: #3c96e2; text-decoration: underline}
+      a:hover   { color: #3c96e2; text-decoration: underline}
+
+    </style>
+
+  </head>
+  <body style="background:#ebebeb; min-height:1000px; color:#000;font-family:Arial, Helvetica, sans-serif; font-size:12px"
+    alink="#FF0000" link="#FF0000" bgcolor="#ebebeb" text="#000000" yahoo="fix">
+
+    <div id="body_style">
+
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" align="left">
+        <tr>
+          <td class="header" height="50" background="<%= "#{root_url}header.png" %>"><img src="<%= "#{root_url}masthead.png" %>" alt="Billing Walrus" /></td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0">
+              <tr>
+                <td>You have payments due!</td>
+              </tr>
+              <tr>
+                <td><strong><%= @bill.vendor.name %></strong> - <%= number_to_currency(@bill.total_due) %> due <%= @bill.due_date %></td>
+              </tr>
+              <tr>
+                <td><h2>Payments</h2></td>
+              </tr>
+              <tr>
+                <td>
+                  <table border="0">
+                    <% @bill.slices.each do |slice| -%>
+                      <tr>
+                        <td><strong><%= slice.user.name %></strong></td>
+                        <td><%= number_to_currency(slice.amount) %></td>
+                      </tr>
+                    <% end -%>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>To log a payment, visit <a href="<%= root_url %>">Billing Walrus</a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+    </div> <!--end wrapper-->
+
+  </body>
+</html>

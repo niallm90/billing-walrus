@@ -24,6 +24,7 @@
 
 <div class="form-actions">
   <%= link_to 'Add Receiver', new_slice_path(@bill), :class => 'btn btn-success' %>
+  <%= link_to 'Send Bill Email', bill_mail_path(@bill), :method => :post, :class => 'btn btn-success' %>
   <%= link_to 'Back', bills_path, :class => 'btn' %>
   <span class="pull-right">
     <%= link_to 'Edit Bill', edit_bill_path(@bill), :class => 'btn btn-primary' %>
