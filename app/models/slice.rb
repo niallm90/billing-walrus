@@ -6,8 +6,7 @@ class Slice < ActiveRecord::Base
   attr_accessible :amount, :user_id, :bill_id, :payments
 
   validates :amount, :numericality => {
-                        :greater_than => 0,
-                        :only_integer => true
+                        :greater_than => 0
                       }
   validates :user, :presence => true
   validates :bill, :presence => true

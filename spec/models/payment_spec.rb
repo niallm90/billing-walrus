@@ -21,14 +21,10 @@ describe Payment do
     subject.amount.should == 1000
   end
 
-  it "has an integer payment greater than zero" do
+  it "has a payment greater than zero" do
     lambda do
       Payment.create!(:amount => 0)
     end.should raise_exception(ActiveRecord::RecordInvalid, /greater than 0/)
-
-    lambda do
-      Payment.create!(:amount => 1.23)
-    end.should raise_exception(ActiveRecord::RecordInvalid, /integer/)
   end
 
 end
