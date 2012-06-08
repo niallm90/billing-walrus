@@ -1,11 +1,4 @@
 GIT
-  remote: http://github.com/Nerian/bootstrap-datepicker-rails.git
-  revision: acdc970f23ac84cb16552c96bfdf409a6ed28794
-  specs:
-    bootstrap-datepicker-rails (0.6.3)
-      railties (>= 3.0)
-
-GIT
   remote: http://github.com/tzeskimo/twitter_bootstrap_form_for.git
   revision: c8b8701ae7464e74f022f424571b9342046e239d
   specs:
@@ -45,6 +38,8 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-datepicker-rails (0.6.14)
+      railties (>= 3.0)
     builder (3.0.0)
     cancan (1.6.7)
     coderay (1.0.6)
@@ -173,7 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-datepicker-rails!
+  bootstrap-datepicker-rails
   cancan
   coffee-rails
   date_validator
