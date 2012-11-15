@@ -15,3 +15,5 @@
 /tmp
 Gemfile.lock
 .rvmrc
+
+config/newrelic.yml
