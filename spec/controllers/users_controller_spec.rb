@@ -7,9 +7,9 @@ describe UsersController do
   context "when a user is not signed in" do
     specify { get(:dashboard).should redirect_to new_user_session_url }
     specify { get(:index).should redirect_to new_user_session_url }
-    specify { get(:show).should redirect_to new_user_session_url }
+    specify { get(:show, :id => 1).should redirect_to new_user_session_url }
     specify { get(:new).should redirect_to new_user_session_url }
-    specify { get(:edit).should redirect_to new_user_session_url }
+    specify { get(:edit, :id => 1).should redirect_to new_user_session_url }
   end
 
   context "when a user is signed in" do

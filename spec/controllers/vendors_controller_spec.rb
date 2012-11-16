@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe VendorsController do
 
+  let(:service) { FactoryGirl.create :service }
+  let(:vendor) { FactoryGirl.create :vendor }
+
   context "when a user is not signed in" do
     specify { get(:index).should redirect_to new_user_session_url }
-    specify { get(:show).should redirect_to new_user_session_url }
+    specify { get(:show, :id => service.id).should redirect_to new_user_session_url }
     specify { get(:new).should redirect_to new_user_session_url }
   end
 
   context "when a user is signed in" do
-
-    let(:service) { FactoryGirl.create :service }
-    let(:vendor) { FactoryGirl.create :vendor }
 
     before do
       sign_in_super_user

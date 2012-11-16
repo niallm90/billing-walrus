@@ -2,23 +2,23 @@ require 'spec_helper'
 
 describe PaymentsController do
 
+  let(:payment) { FactoryGirl.create :payment }
+  let(:slice) { FactoryGirl.create :slice }
+
   context "when a user is not signed in" do
-    specify { get(:index).should redirect_to new_user_session_url }
-    specify { get(:show).should redirect_to new_user_session_url }
-    specify { get(:new).should redirect_to new_user_session_url }
+    specify { get(:index, :slice_id => slice.id, :bill_id => slice.bill.id).should redirect_to new_user_session_url }
+    specify { get(:show, :slice_id => slice.id, :bill_id => slice.bill.id, :id => 1).should redirect_to new_user_session_url }
+    specify { get(:new, :slice_id => slice.id, :bill_id => slice.bill.id).should redirect_to new_user_session_url }
   end
 
   context "when a user is signed in" do
-
-    let(:payment) { FactoryGirl.create :payment }
-    let(:slice) { FactoryGirl.create :slice }
 
     before do
       sign_in_super_user
     end
 
     describe 'GET index' do
-      before { get :index }
+      before { get :index, :slice_id => slice.id, :bill_id => slice.bill.id}
 
       specify { response.should be_success }
 
@@ -26,7 +26,7 @@ describe PaymentsController do
     end
 
     describe 'GET show' do
-      before { get :show, :id => payment.id }
+      before { get :show, :id => payment.id, :slice_id => slice.id, :bill_id => slice.bill.id }
 
       specify { response.should be_success }
 
@@ -40,7 +40,7 @@ describe PaymentsController do
             :payment => {
               :slice_id => slice.id,
               :amount => 100
-            }
+            }, :slice_id => slice.id, :bill_id => slice.bill.id
         end.should change(Payment, :count).by 1
 
         response.should redirect_to slice_url(slice, :bill_id => slice.bill.id)
@@ -48,7 +48,7 @@ describe PaymentsController do
       end
 
       it "fails to create invalid payments" do
-        post :create, :invalid => "invalid"
+        post :create, :invalid => "invalid", :slice_id => slice.id, :bill_id => slice.bill.id
         response.should render_template :new
       end
     end
@@ -66,7 +66,7 @@ describe PaymentsController do
           put :update, :bill_id => payment.slice.bill.id, :slice_id => payment.slice.id, :id => payment.id,
             :payment => {
               :amount => 200
-            }
+            }, :slice_id => slice.id, :bill_id => slice.bill.id
         end.should change{ Payment.last.amount }
       end
     end
@@ -80,7 +80,7 @@ describe PaymentsController do
 
       it "deletes a payment" do
         lambda do
-          delete :destroy, :id => @payment.id
+          delete :destroy, :id => @payment.id, :slice_id => slice.id, :bill_id => slice.bill.id
           response.should redirect_to slice_url(@payment.slice.bill, @payment.slice)
         end.should change(Payment, :count).by(-1)
       end

@@ -1,7 +1,7 @@
 class SlicesController < ApplicationController
-  load_and_authorize_resource
 
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   # GET /slices/1
   # GET /slices/1.json

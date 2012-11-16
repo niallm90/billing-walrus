@@ -4,7 +4,7 @@ describe BillsController do
 
   context "when a user is not signed in" do
     specify { get(:index).should redirect_to new_user_session_url }
-    specify { get(:show).should redirect_to new_user_session_url }
+    specify { get(:show, :id => 1).should redirect_to new_user_session_url }
     specify { get(:new).should redirect_to new_user_session_url }
   end
 
