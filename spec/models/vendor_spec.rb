@@ -21,12 +21,12 @@ describe Vendor do
       subject.bills << FactoryGirl.build(:bill)
       subject.save
       subject.reload
-    }.should change(subject.bills, :count).by 1
+    }.to change(subject.bills, :count).by 1
 
     expect {
       old_bill = subject.bills.first
       old_bill.delete
-    }.should change(subject.bills, :count).by -1
+    }.to change(subject.bills, :count).by -1
   end
 
 end

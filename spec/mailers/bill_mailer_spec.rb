@@ -32,7 +32,7 @@ describe BillMailer do
     it "sends the mail" do
       expect {
         bill_email.deliver
-      }.should change(ActionMailer::Base.deliveries, :count).by 1
+      }.to change(ActionMailer::Base.deliveries, :count).by 1
     end
   end
 end

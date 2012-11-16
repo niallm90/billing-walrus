@@ -20,12 +20,12 @@ describe Service do
       subject.vendors << FactoryGirl.build(:vendor)
       subject.save
       subject.reload
-    }.should change(subject.vendors, :count).by 1
+    }.to change(subject.vendors, :count).by 1
 
     expect {
       existing_vendor = subject.vendors.first
       existing_vendor.delete
-    }.should change(subject.vendors, :count).by -1
+    }.to change(subject.vendors, :count).by -1
   end
 
 end
