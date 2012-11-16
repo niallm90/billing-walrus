@@ -8,20 +8,6 @@ BillingWalrus::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Set the default host for ActionMailer
-  config.action_mailer.default_url_options = { :host => 'walrus.heroku.com' }
-  ActionMailer::Base.default :from => 'bill@walrus.heroku.com'
-  ActionMailer::Base.default :reply_to => 'all@blue-base.info'
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name       => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com'
-  }
-  ActionMailer::Base.delivery_method = :smtp
-
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
@@ -71,4 +57,26 @@ BillingWalrus::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Set the default host for ActionMailer
+
+  mail_config_file = File.join(Rails.root, 'config', 'mail.yml')
+  raise "#{mail_config_file} is missing" unless File.exists? mail_config_file
+  mail_config = YAML.load_file(mail_config_file)[Rails.env].symbolize_keys
+
+  config.action_mailer.default_url_options = { :host => mail_config[:host]}
+
+  ActionMailer::Base.default :from => mail_config[:default_from]
+  ActionMailer::Base.default :reply_to => mail_config[:default_reply_to]
+
+  ActionMailer::Base.smtp_settings = {
+    :address        => mail_config[:address],
+    :port           => mail_config[:port],
+    :authentication => :plain,
+    :user_name       => mail_config[:user_name],
+    :password       => mail_config[:password],
+    :domain         => mail_config[:domain]
+  }
+  ActionMailer::Base.delivery_method = :smtp
+
 end

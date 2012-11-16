@@ -17,3 +17,4 @@ Gemfile.lock
 .rvmrc
 
 config/newrelic.yml
+config/mail.yml
