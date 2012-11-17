@@ -12,7 +12,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'therubyracer'
   gem 'jquery-rails'
-  gem 'backbone-on-rails'
+  gem 'rails-backbone'
   gem 'handlebars_assets'
 end
 

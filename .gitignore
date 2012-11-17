@@ -18,3 +18,5 @@ Gemfile.lock
 
 config/newrelic.yml
 config/mail.yml
+
+node_modules
